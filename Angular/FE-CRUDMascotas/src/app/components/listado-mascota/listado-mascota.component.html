@@ -34,6 +34,23 @@
       <td mat-cell *matCellDef="let element"> {{element.peso}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef>
+          <button mat-button class="btn_agregar">Agregar</button>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <span class="search" matTooltip="Ver">
+          <mat-icon>search</mat-icon>
+        </span>
+        <span class="edit" matTooltip="Editar">
+          <mat-icon>edit</mat-icon>
+        </span>
+        <span class="delete" matTooltip="Eliminar">
+          <mat-icon>delete</mat-icon>
+        </span>
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
