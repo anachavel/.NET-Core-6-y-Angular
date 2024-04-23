@@ -28,7 +28,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule
   ],
   // Ahora también los exporto para poder utilizarlos en app.module.ts
-  exports?: [
+  exports: [
     CommonModule,
     MatSlideToggleModule,
     MatTableModule,
@@ -39,5 +39,6 @@ import { MatButtonModule } from '@angular/material/button';
     MatIconModule,
     MatTooltipModule,
     MatButtonModule
+    ]
 })
 export class SharedModule { }
