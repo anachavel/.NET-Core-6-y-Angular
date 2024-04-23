@@ -17,6 +17,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field'; // Este va de la mano con "Input", así que lo pongo abajo
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,7 @@ import { MatInputModule } from '@angular/material/input';
     ListadoMascotaComponent,
     VerMascotaComponent
   ],
-  imports: [ // Aquí en los imports van los módulos
+  imports: [ // Aquí en los imports van los módulos que voy añadiendo
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -34,7 +37,10 @@ import { MatInputModule } from '@angular/material/input';
     MatPaginatorModule,
     MatSortModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
