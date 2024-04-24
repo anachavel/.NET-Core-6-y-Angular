@@ -12,9 +12,18 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
+// Componentes
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    SpinnerComponent
+  ],
+  // Aquí vienen los módulos
   imports: [
     CommonModule,
     MatSlideToggleModule,
@@ -25,7 +34,10 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatIconModule,
     MatTooltipModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatSnackBarModule,
+    MatProgressBarModule
   ],
   // Ahora también los exporto para poder utilizarlos en app.module.ts
   exports: [
@@ -38,7 +50,11 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatIconModule,
     MatTooltipModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatSnackBarModule,
+    SpinnerComponent,
+    MatProgressBarModule
     ]
 })
 export class SharedModule { }

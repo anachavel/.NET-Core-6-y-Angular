@@ -2,6 +2,8 @@
   <h1>Listado de mascotas</h1>
 </div>
 
+<app-spinner *ngIf="loading"></app-spinner>
+
 <div class="container">
   <mat-form-field>
     <input matInput (keyup)="applyFilter($event)" placeholder="Filtro" autocomplete="off">
@@ -45,7 +47,7 @@
         <span routerLink="/editarMascota/2" class="edit" matTooltip="Editar">
           <mat-icon>edit</mat-icon>
         </span>
-        <span class="delete" matTooltip="Eliminar">
+        <span (click)="eliminarMascota()" class="delete" matTooltip="Eliminar">
           <mat-icon>delete</mat-icon>
         </span>
       </td>
