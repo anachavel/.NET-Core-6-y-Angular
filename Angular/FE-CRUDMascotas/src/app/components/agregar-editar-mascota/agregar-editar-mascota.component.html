@@ -9,5 +9,43 @@
     <mat-card-subtitle>
       Datos de la mascota
     </mat-card-subtitle>
+    <form>
+      <mat-grid-list cols="2" rowHeight="80px">
+        <mat-grid-tile [colspan]="2">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput autocomplete="off">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="outline">
+            <mat-label>Raza</mat-label>
+            <input matInput autocomplete="off">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="outline">
+            <mat-label>Color</mat-label>
+            <input matInput autocomplete="off">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="outline">
+            <mat-label>Edad</mat-label>
+            <input matInput autocomplete="off">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="outline">
+            <mat-label>Peso</mat-label>
+            <input matInput autocomplete="off">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2">
+          <button class="btn_aceptar" routerLink="/listaMascota" mat-raised-button>Volver</button>
+          <button mat-raised-button color="primary">Aceptar</button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
   </mat-card>
 </div>
