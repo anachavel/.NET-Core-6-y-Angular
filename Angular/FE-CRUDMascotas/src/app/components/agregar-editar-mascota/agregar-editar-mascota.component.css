@@ -8,5 +8,9 @@
 }
 
 .btn_aceptar {
-    margin-right: 5px;
+  margin-left: 5px;
+  background-color: blueviolet;
+  font-size: 10px;
+  line-height: 28px;
+  color: white;
 }

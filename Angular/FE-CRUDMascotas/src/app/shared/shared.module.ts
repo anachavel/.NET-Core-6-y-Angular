@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+// Módulos
+import { ReactiveFormsModule } from '@angular/forms'; // Para utilizar Reactive Forms
+
 // Traigo aquí todos los módulos que importo para que no ocupe tanto en app.module.ts
 // Angular Material
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -39,7 +42,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     MatCardModule,
     MatSnackBarModule,
     MatProgressBarModule,
-    MatGridListModule
+    MatGridListModule,
+    ReactiveFormsModule
   ],
   // Ahora también los exporto para poder utilizarlos en app.module.ts
   exports: [
@@ -57,7 +61,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     MatSnackBarModule,
     SpinnerComponent,
     MatProgressBarModule,
-    MatGridListModule
+    MatGridListModule,
+    ReactiveFormsModule
     ]
 })
 export class SharedModule { }
