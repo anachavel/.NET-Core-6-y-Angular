@@ -7,7 +7,7 @@
         public string Color { get; set; }
         public int Edad { get; set; }
         public float Peso { get; set; }
-        public DateTime FechaCreación { get; set;}
+        public DateTime FechaCreacion { get; set;}
 
     }
 }
