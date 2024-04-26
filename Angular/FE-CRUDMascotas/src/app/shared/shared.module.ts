@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 // Módulos
 import { ReactiveFormsModule } from '@angular/forms'; // Para utilizar Reactive Forms
+import { HttpClientModule } from '@angular/common/http';
 
 // Traigo aquí todos los módulos que importo para que no ocupe tanto en app.module.ts
 // Angular Material
@@ -43,7 +44,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     MatSnackBarModule,
     MatProgressBarModule,
     MatGridListModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   // Ahora también los exporto para poder utilizarlos en app.module.ts
   exports: [
@@ -62,7 +64,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     SpinnerComponent,
     MatProgressBarModule,
     MatGridListModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
     ]
 })
 export class SharedModule { }
