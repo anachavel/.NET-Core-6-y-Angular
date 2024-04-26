@@ -4,17 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Mascota } from 'src/app/interfaces/mascota';
-
-const listaMascotas: Mascota[] = [
-  { nombre: 'Ciro', edad: 3, raza: 'Golden', color: 'Dorado', peso: 28 },
-  { nombre: 'Kurama', edad: 1, raza: 'Shiba Inu', color: 'Marrón', peso: 7 },
-  { nombre: 'Peluso', edad: 2, raza: 'Pomerania', color: 'Marrón', peso: 4 },
-  { nombre: 'Croqueta', edad: 4, raza: 'Shiba Inu', color: 'Negro', peso: 12 },
-  { nombre: 'Mark', edad: 1, raza: 'Callejero', color: 'Blanco', peso: 11 },
-  { nombre: 'Aquiles', edad: 5, raza: 'Labrador', color: 'Negro', peso: 35 },
-  { nombre: 'Mike', edad: 6, raza: 'Callejero', color: 'Blanco', peso: 15 }
-];
-
+import { MascotaService } from '../../services/mascota.service';
 
 @Component({
   selector: 'app-listado-mascota', // Para renderizar este componente, tenemos que utilizar este selector.
@@ -23,27 +13,52 @@ const listaMascotas: Mascota[] = [
 })
 export class ListadoMascotaComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['nombre', 'edad', 'raza', 'color', 'peso', 'acciones'];
-  dataSource = new MatTableDataSource<Mascota>(listaMascotas);
+  dataSource = new MatTableDataSource<Mascota>();
   loading: boolean = false; // Para iniciar el spinner desactivado
 
   @ViewChild(MatPaginator) paginator!: MatPaginator; // Paginación
   @ViewChild(MatSort) sort!: MatSort; // Ordenación
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(private snackBar: MatSnackBar, private _mascotaService: MascotaService) { } // Los servicios se ponen empezando por "_"
 
   ngOnInit(): void {
+    // Cuando se inicializa este componente, voy a ejecutar el siguiente método:
+    this.obtenerMascotas();
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.paginator._intl.itemsPerPageLabel = 'Items por página'; // Para ponerlo en español
+    if (this.dataSource.data.length > 0) {
+      this.paginator._intl.itemsPerPageLabel = 'Items por página'; // Para ponerlo en español
+    }
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  obtenerMascotas() {
+    this.loading = true;
+    this._mascotaService.getMascotas().subscribe(data => {
+      this.loading = false;
+      this.dataSource.data = data;
+      })
+    }
+
+  /*
+  obtenerMascotas() {
+    this.loading = true;
+    this._mascotaService.getMascotas().subscribe({
+      next: (data) => {
+        this.loading = false;
+        this.dataSource.data = data;
+      },
+      error: (e) => this.loading = false,
+      complete: () => console.info('complete')
+    })
+  }*/
 
   eliminarMascota() {
     this.loading = true;

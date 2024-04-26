@@ -10,6 +10,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// CORS
+// Se utilizan para cuando tenemos el backend y el frontend en diferentes puertos
+builder.Services.AddCors(options => options.AddPolicy("AllowWebApp",
+    builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
+
 // Add context
 builder.Services.AddDbContext<AplicationDbContext>(options =>
 {
@@ -24,6 +29,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors("AllowWebApp"); // Añado esta línea para los CORS
 
 app.UseHttpsRedirection();
 
