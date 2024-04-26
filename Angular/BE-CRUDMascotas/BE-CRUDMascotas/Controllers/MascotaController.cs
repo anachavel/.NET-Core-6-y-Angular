@@ -117,7 +117,7 @@ namespace BE_CRUDMascotas.Controllers
 
                 await _context.SaveChangesAsync();
 
-                return NotFound();
+                return NoContent();
             }
             catch (Exception ex)
             {
