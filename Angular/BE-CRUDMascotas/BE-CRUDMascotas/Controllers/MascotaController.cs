@@ -19,7 +19,7 @@ namespace BE_CRUDMascotas.Controllers
 
 
 
-        // Hay que añadir el siguiente atributo para cuando quiera acceder a esa petición desde Postman por ejemplo
+        // Hay que añadir el siguiente atributo para cuando quiera acceder a esa petición desde Postman por ejemplo.
         [HttpGet]
         public async Task<IActionResult> Get()
         {
