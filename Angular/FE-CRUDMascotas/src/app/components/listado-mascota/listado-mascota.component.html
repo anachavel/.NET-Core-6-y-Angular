@@ -47,7 +47,7 @@
         <span routerLink="/editarMascota/2" class="edit" matTooltip="Editar">
           <mat-icon>edit</mat-icon>
         </span>
-        <span (click)="eliminarMascota()" class="delete" matTooltip="Eliminar">
+        <span (click)="eliminarMascota(element.id)" class="delete" matTooltip="Eliminar">
           <mat-icon>delete</mat-icon>
         </span>
       </td>
