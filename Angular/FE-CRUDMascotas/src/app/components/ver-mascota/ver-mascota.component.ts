@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 export class VerMascotaComponent implements OnInit {
   id: number;
   mascota!: Mascota;
+  loading: boolean = false;
 
   // mascota$!: Observable<Mascota>; // Coloco un sbolo de $ para indicar que es un observable   --PIPE ASYNC
 
@@ -25,8 +26,10 @@ export class VerMascotaComponent implements OnInit {
   }
 
   obtenerMascota() {
+    this.loading = true;
     this._mascotaService.getMascota(this.id).subscribe(data => {
       this.mascota = data;
+      this.loading = false;
     })
   }
 
