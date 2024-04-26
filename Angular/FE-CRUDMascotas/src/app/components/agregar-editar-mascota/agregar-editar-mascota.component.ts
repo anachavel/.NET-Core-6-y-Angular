@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Mascota } from '../../interfaces/mascota';
 import { MascotaService } from '../../services/mascota.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-agregar-editar-mascota',
@@ -12,13 +12,15 @@ import { Router } from '@angular/router';
 })
 export class AgregarEditarMascotaComponent implements OnInit {
   loading: boolean = false;
+  form: FormGroup;
+  id: number;
+  operacion: string = 'Agregar';
   // NOTA: cuando en el html pongo *ngIf="loading", significa que quiero que se muestre solo cuando, en este caso, "loading" sea true
-
-  form: FormGroup
 
   constructor(private fb: FormBuilder,
     private snackBar: MatSnackBar,
     private router: Router,
+    private aRoute: ActivatedRoute,
     private _mascotaService: MascotaService) { // Inyección de dependencia
     this.form = this.fb.group({
       nombre: ['', Validators.required], // Con Validators.required indico que el campo ese tiene que ser requerido
@@ -27,9 +29,14 @@ export class AgregarEditarMascotaComponent implements OnInit {
       edad: ['', Validators.required],
       peso: ['', Validators.required]
     })
+    this.id = Number(this.aRoute.snapshot.paramMap.get('id'));
+    console.log(this.id);
   }
 
   ngOnInit(): void {
+    if (this.id != 0) {
+      this.operacion = 'Editar';
+    }
   }
 
   agregarMascota() {

@@ -44,7 +44,7 @@
         <span routerLink="/verMascota/{{ element.id }}" class="search" matTooltip="Ver">
           <mat-icon>search</mat-icon>
         </span>
-        <span routerLink="/editarMascota/2" class="edit" matTooltip="Editar">
+        <span routerLink="/editarMascota/{{ element.id }}" class="edit" matTooltip="Editar">
           <mat-icon>edit</mat-icon>
         </span>
         <span (click)="eliminarMascota(element.id)" class="delete" matTooltip="Eliminar">
