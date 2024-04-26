@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Mascota } from '../../interfaces/mascota';
+import { MascotaService } from '../../services/mascota.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-agregar-editar-mascota',
@@ -13,7 +16,10 @@ export class AgregarEditarMascotaComponent implements OnInit {
 
   form: FormGroup
 
-  constructor(private fb: FormBuilder) { // Inyección de dependencia
+  constructor(private fb: FormBuilder,
+    private snackBar: MatSnackBar,
+    private router: Router,
+    private _mascotaService: MascotaService) { // Inyección de dependencia
     this.form = this.fb.group({
       nombre: ['', Validators.required], // Con Validators.required indico que el campo ese tiene que ser requerido
       raza: ['', Validators.required],
@@ -40,7 +46,18 @@ export class AgregarEditarMascotaComponent implements OnInit {
       edad: this.form.value.edad,
       peso: this.form.value.peso
     }
-    console.log(mascota);
+    // Enviamos el objeto al BE
+    this._mascotaService.addMascota(mascota).subscribe(data => {
+      this.mensajeExito();
+      this.router.navigate(['/listMascotas']); // Para redireccionar a la página princimal una vez se ha creado un nuevo post de mascota
+    })
+  }
+
+  mensajeExito() {
+    this.snackBar.open('La mascota fue registrada correctamente', '', {
+      duration: 4000,
+      horizontalPosition: 'center'
+    });
   }
 
 }

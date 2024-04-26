@@ -75,5 +75,22 @@ namespace BE_CRUDMascotas.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Post(Mascota mascota)
+        {
+            try
+            {
+                mascota.FechaCreacion = DateTime.Now;
+                _context.Add(mascota);
+                await _context.SaveChangesAsync();
+                // Para que devuelva el mensaje "201"
+                return CreatedAtAction("Get", new { id = mascota.Id }, mascota); // La mascota viene sin id, pero se le asigna cuando entre a la base de datos
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }
