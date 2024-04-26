@@ -23,4 +23,9 @@ export class MascotaService {
   getMascotas(): Observable<Mascota[]> { // Un observable (o promesa) devuelve un flujo de datos, aunque en este caso solo será un array de objetos
     return this.http.get < Mascota[]>(`${this.myAppUrl}${this.myApiUrl}`);
   }
+
+  getMascota(id: number): Observable<Mascota> {
+    return this.http.get<Mascota>(`${this.myAppUrl}${this.myApiUrl}${id}`);
+  }
+
 }

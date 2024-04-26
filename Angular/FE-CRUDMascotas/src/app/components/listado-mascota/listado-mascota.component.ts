@@ -44,21 +44,8 @@ export class ListadoMascotaComponent implements OnInit, AfterViewInit {
     this._mascotaService.getMascotas().subscribe(data => {
       this.loading = false;
       this.dataSource.data = data;
-      })
-    }
-
-  /*
-  obtenerMascotas() {
-    this.loading = true;
-    this._mascotaService.getMascotas().subscribe({
-      next: (data) => {
-        this.loading = false;
-        this.dataSource.data = data;
-      },
-      error: (e) => this.loading = false,
-      complete: () => console.info('complete')
     })
-  }*/
+  }
 
   eliminarMascota() {
     this.loading = true;
