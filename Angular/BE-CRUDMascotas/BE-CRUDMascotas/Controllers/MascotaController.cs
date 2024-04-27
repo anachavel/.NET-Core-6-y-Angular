@@ -1,8 +1,8 @@
 ﻿using BE_CRUDMascotas.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using BE_CRUDMascotas.Models.DTO;
 
 namespace BE_CRUDMascotas.Controllers
 {
@@ -11,10 +11,12 @@ namespace BE_CRUDMascotas.Controllers
     public class MascotaController : ControllerBase
     {
         private readonly AplicationDbContext _context; // "_context" es para que el contexto pueda ser utilizado
+        private readonly IMapper _mapper;
 
-        public MascotaController(AplicationDbContext context)
+        public MascotaController(AplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
 
@@ -26,7 +28,10 @@ namespace BE_CRUDMascotas.Controllers
             try
             {
                 var listMascotas = await _context.Mascotas.ToListAsync(); // Coloco "await" para que espere ya que es asíncrono
-                return Ok(listMascotas);
+
+                var listMascotasDto = _mapper.Map<IEnumerable<MascotaDTO>>(listMascotas);
+
+                return Ok(listMascotasDto);
             }
             catch (Exception ex)
             {
@@ -45,7 +50,9 @@ namespace BE_CRUDMascotas.Controllers
                     return NotFound();
                 }
 
-                return Ok(mascota);
+                var mascotaDto = _mapper.Map<MascotaDTO>(mascota);
+
+                return Ok(mascotaDto);
             }
             catch (Exception ex)
             {
@@ -76,15 +83,19 @@ namespace BE_CRUDMascotas.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Mascota mascota)
+        public async Task<IActionResult> Post(MascotaDTO mascotaDto)
         {
             try
             {
+                var mascota = _mapper.Map<Mascota>(mascotaDto);
+
                 mascota.FechaCreacion = DateTime.Now;
                 _context.Add(mascota);
                 await _context.SaveChangesAsync();
+
+                var mascotaItemDto = _mapper.Map<MascotaDTO>(mascotaDto);
                 // Para que devuelva el mensaje "201"
-                return CreatedAtAction("Get", new { id = mascota.Id }, mascota); // La mascota viene sin id, pero se le asigna cuando entre a la base de datos
+                return CreatedAtAction("Get", new { id = mascotaItemDto.Id }, mascotaItemDto); // La mascota viene sin id, pero se le asigna cuando entre a la base de datos
             }
             catch (Exception ex)
             {
@@ -93,10 +104,12 @@ namespace BE_CRUDMascotas.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Mascota mascota)
+        public async Task<IActionResult> Put(int id, MascotaDTO mascotaDto)
         {
             try
             {
+                var mascota = _mapper.Map<Mascota>(mascotaDto);
+
                 if (id != mascota.Id)
                 {
                     return BadRequest();
